@@ -20,6 +20,8 @@ pipeline {
 				def featureFlagJsonFiles = findFiles(glob: 'ff-*.json') 
 				for featureFlagJsonFile in featureFlagJsonFiles
 					def content = readJSON file: featureFlagJsonFile.path + '/' + featureFlagJsonFile.name + '.json'
+					
+					sh (curl -X POST -H "Content-Type: application/json"  --data content https://localhost:8082/postJson/ )
 			}
 
        
